@@ -1,0 +1,20 @@
+import "Srl/Time";
+
+@merge module Srl {
+    @merge module Time {
+        function getStringDateTime (timestamp: ArchInt) => String {
+            def time: DetailedTime;
+            getDetailedTime(timestamp~ptr, time~ptr);
+            def buf: array[Char, 100];
+            String.assign(
+                buf~ptr, "%04d-%02d-%02d %02d:%02d:%02d",
+                time.year + 1900, time.month + 1, time.day, time.hour, time.minute, time.second
+            );
+            return String(buf~ptr);
+        }
+
+        function getCurrentStringDateTime () => String {
+            return getStringDateTime(getTimestamp(0));
+        }
+    }
+}

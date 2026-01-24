@@ -1,0 +1,26 @@
+import "Srl/Console";
+import "Srl/System";
+import "Apm";
+Apm.importFile("Alusus/Sle", "AstHelpers.alusus");
+use Srl;
+use AstHelpers;
+
+def i: Int = 42;
+def s: CharsPtr = "strval";
+def ns: CharsPtr = 0;
+System.setEnv("mycustomenvvar", "envval", 1);
+System.setEnv("mycustomintenvvar", "45", 1);
+
+func test {
+    strLiteralFromVal[s];
+    strLiteralFromVal[ns, "defaultstrval"];
+    strLiteralFromEnvVar["mycustomenvvar"];
+    strLiteralFromEnvVar["nonexistingenvvar", "defaultenvval"];
+    intLiteralFromInt[i];
+    intLiteralFromCharsPtr["43"];
+    intLiteralFromCharsPtr[0, "44"];
+    intLiteralFromEnvVar["mycustomintenvvar"];
+    intLiteralFromEnvVar["nonexistingenvvar", "46"];
+}
+test();
+dump_ast test;

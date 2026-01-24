@@ -1,0 +1,24 @@
+@merge module Srl {
+    module Termois {
+        def NCCS: 32;
+
+        class Attr {
+            def iFlag: Word[32];              // input flags
+            def oFlag: Word[32];              // output flags
+            def cFlag: Word[32];              // control flags
+            def lFlag: Word[32];              // local flags
+            def line: Word[8];                // line discipline
+            def cc: array[Word[8], NCCS];     // control characters
+            def ispeed: Word[32];             // input speed
+            def ospeed: Word[32];             // output speed
+        }
+
+        // tcgetattr function declaration
+        @expname[tcgetattr]
+        function getAttr(fd: Int, termios: ref[Attr]): Int;
+
+        // tcsetattr function declaration
+        @expname[tcsetattr]
+        function setAttr(fd: Int, optionalActions: Int, termios: ref[Attr]): Int;
+    }
+}

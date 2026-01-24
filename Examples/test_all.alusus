@@ -1,0 +1,46 @@
+import "Srl/System";
+import "Srl/Fs";
+import "Srl/Console";
+import "Srl/Array";
+import "Srl/String";
+
+use Srl;
+
+System.setEnv("LANGUAGE", "fa", 1);
+
+def files: Array[String]({
+    String("ast_helpers.alusus"),
+    String("enum_example.alusus"),
+    String("get_datetime.alusus"),
+    String("get_system_language.alusus"),
+    String("memory_example.alusus"),
+    String("net_example.alusus"),
+    String("مساعدات_شبم.أسس"),
+    String("مثال_سرد.أسس"),
+    String("هات_التاريخ_والوقت.أسس"),
+    String("هات_لغة_النظام.أسس"),
+    String("مثال_ذاكرة.أسس"),
+    String("مثال_شبكة.أسس"),
+});
+
+def i: Int;
+for i = 0, i < files.getLength(), ++i {
+    Console.print("Running: %s\n", files(i).buf);
+    if i == 0 {
+        System.exec(String("echo \">>>>>> ") + files(i) + "\\n\" > result.output");
+    } else {
+        System.exec(String("echo \">>>>>> ") + files(i) + "\\n\" >> result.output");
+    }
+    System.exec(String("alusus ") + files(i) + String(" >> result.output"));
+    System.exec("echo \"\\n\\n\" >> result.output");
+}
+
+def received: String = Fs.readFile("result.output");
+def expected: String = Fs.readFile("expected_result.output");
+
+if received == expected {
+    Console.print("Test successful,\n");
+} else {
+    Console.print("Test failed,\n");
+}
+

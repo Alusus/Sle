@@ -1,0 +1,30 @@
+import "Srl/String";
+import "Core/Data";
+import "Spp";
+import "Srl/misc";
+
+@merge module AstHelpers {
+    macro strLiteralFromVal [val] preprocess {
+        Spp.astMgr.insertAst(Core.Data.Ast.StringLiteral(val));
+    }
+
+    macro strLiteralFromVal [val, default] strLiteralFromVal[Srl.charsPtrOrDefault[val, default]];
+
+    macro strLiteralFromEnvVar [varName] strLiteralFromVal[System.getEnv(varName)];
+
+    macro strLiteralFromEnvVar [varName, default] strLiteralFromVal[System.getEnv(varName), default];
+
+    macro intLiteralFromInt [val] preprocess {
+        Spp.astMgr.insertAst(Core.Data.Ast.IntegerLiteral(String() + val));
+    }
+
+    macro intLiteralFromCharsPtr [val] preprocess {
+        Spp.astMgr.insertAst(Core.Data.Ast.IntegerLiteral(val));
+    }
+
+    macro intLiteralFromCharsPtr [val, default] intLiteralFromCharsPtr[Srl.charsPtrOrDefault[val, default]];
+
+    macro intLiteralFromEnvVar [varName] intLiteralFromCharsPtr[System.getEnv(varName)];
+
+    macro intLiteralFromEnvVar [varName, default] intLiteralFromCharsPtr[System.getEnv(varName), default];
+}

@@ -1,0 +1,19 @@
+import "Srl/System";
+import "Srl/String";
+import "misc";
+
+@merge module Srl {
+    @merge module System {
+        function getSystemLanguage(): String {
+            def langEnv: CharsPtr = getEnv("LANGUAGE");
+            if langEnv == 0 || String.getLength(langEnv) == 0 langEnv = getEnv("LANG");
+            if langEnv == 0 || String.getLength(langEnv) == 0 langEnv = "en";
+
+            def lang: String;
+            lang.assign(langEnv, 2);
+            return lang;
+        }
+
+        macro envVarOrDefault[varName, defaultVal] charsPtrOrDefault[System.getEnv(varName), default];
+    }
+}

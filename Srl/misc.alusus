@@ -1,0 +1,8 @@
+import "Srl/srl";
+
+@merge module Srl {
+    macro charsPtrOrDefault [val, default] CharsPtr().{
+        this = val;
+        if this == 0 this = default;
+    }
+}

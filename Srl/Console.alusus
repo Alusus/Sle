@@ -1,0 +1,86 @@
+import "Srl/Console";
+import "Srl/String";
+import "Core";
+
+if not Srl.String.isEqual(Process.platform, "windows") {
+    Core.importFile("Termios.alusus");
+}
+
+@merge module Srl {
+    @merge module Console {
+        preprocess {
+            if String.isEqual(Process.platform, "windows") {
+                Spp.astMgr.insertAst(ast {
+                    @expname[_getch] function getStealthChar (): Int;
+                });
+            } else {
+                Spp.astMgr.insertAst(ast {
+                    function getStealthChar (): Int {
+                        use Termois;
+
+                        // Terminal flag constants
+                        def ECHO: 0x00000008;
+                        def ICANON: 0x00000002;
+                        def TCSANOW: 0;
+
+                        // Get current terminal attributes
+                        def oldAttr: Attr;
+                        def newAttr: Attr;
+                        getAttr(0, oldAttr);
+
+                        // Copy to new attributes
+                        newAttr = oldAttr;
+
+                        // Disable echo and canonical mode
+                        newAttr.lFlag = newAttr.lFlag & ((ECHO | ICANON) $ -1);
+
+                        // Set new attributes
+                        setAttr(0, TCSANOW, newAttr);
+
+                        // Read character
+                        def ch: Char = Srl.Console.getChar();
+
+                        // Restore old attributes
+                        setAttr(0, TCSANOW, oldAttr);
+
+                        return ch;
+                    }
+                });
+            }
+        }
+
+        function getStealthString(): String {
+            def str: String;
+
+            while 1 {
+                def ch: Char = getStealthChar();
+
+                if ch == 10u || ch == 13u {
+                    // Enter key (newline or carriage return)
+                    Srl.Console.print("\n");
+                    break;
+                } else if ch == 127u || ch == 8u {
+                    // Backspace or Delete - handle UTF-8 properly
+                    if str.getLength() > 0 {
+                        // Find the start of the last UTF-8 character
+                        def len: ArchInt = str.getLength();
+                        def i: ArchInt = len - 1;
+
+                        // Skip UTF-8 continuation bytes (10xxxxxx = 0x80-0xBF)
+                        while i > 0 && (str(i)~cast[Word[8]] & 0xC0) == 0x80 {
+                            i -= 1;
+                        }
+
+                        // Remove from the start of the last character to the end
+                        str = str.slice(0, i);
+                    }
+                } else {
+                    // Regular character
+                    str += ch;
+                }
+            }
+
+            return str;
+        }
+    }
+}

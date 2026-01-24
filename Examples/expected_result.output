@@ -1,0 +1,114 @@
+>>>>>> ast_helpers.alusus
+
+------------------ Parsed Data Dump ------------------
+Function test() [Main.Function]
+ type: FunctionType member: 0 [Main.Function]
+  argTypes: NULL
+  retType: NULL
+ body: Block [Main.BlockStatements.StmtList]
+  StringLiteral: strval
+  StringLiteral: defaultstrval
+  StringLiteral: envval
+  StringLiteral: defaultenvval
+  IntegerLiteral: 42
+  IntegerLiteral: 43
+  IntegerLiteral: 44
+  IntegerLiteral: 45
+  IntegerLiteral: 46
+------------------------------------------------------
+
+
+
+>>>>>> enum_example.alusus
+
+Int enum value: 1
+Int enum value: 2
+Int enum value: 3
+String enum value: val1
+String enum value: val2
+String enum value: val3
+
+
+
+>>>>>> get_datetime.alusus
+
+Date and Time: 2026-01-23 14:31:21
+
+
+
+>>>>>> get_system_language.alusus
+
+System language: fa
+
+
+
+>>>>>> memory_example.alusus
+
+[33mPreallocation End[0m - Total unfreed allocations: 0. Total allocated size: 480
+
+
+
+>>>>>> net_example.alusus
+
+Response from example.com:
+<!doctype html><html lang="en"><head><title>Example Domain</title><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.<p><a href="https://iana.org/domains/example">Learn more</a></div></body></html>
+
+
+
+>>>>>> مساعدات_شبم.أسس
+
+------------------ Parsed Data Dump ------------------
+Function اختبار() [Main.Function]
+ type: FunctionType member: 0 [Main.Function]
+  argTypes: NULL
+  retType: NULL
+ body: Block [Main.BlockStatements.StmtList]
+  StringLiteral: قيمة_سلسلة
+  StringLiteral: قيمة_سلسلة_مبدئية
+  StringLiteral: قيمة_محيطية
+  StringLiteral: قيمة_محيطية_مبدئية
+  IntegerLiteral: 42
+  IntegerLiteral: 43
+  IntegerLiteral: 44
+  IntegerLiteral: 45
+  IntegerLiteral: 46
+------------------------------------------------------
+
+
+
+>>>>>> مثال_سرد.أسس
+
+قيمة السرد الرقمي: 1
+قيمة السرد الرقمي: 2
+قيمة السرد الرقمي: 3
+قيمة السرد النصي: ق1
+قيمة السرد النصي: ق2
+قيمة السرد النصي: ق3
+
+
+
+>>>>>> هات_التاريخ_والوقت.أسس
+
+التاريخ والوقت: 2026-01-23 14:31:21
+
+
+
+>>>>>> هات_لغة_النظام.أسس
+
+لغة النظام: fa
+
+
+
+>>>>>> مثال_ذاكرة.أسس
+
+[33mPreallocation End[0m - Total unfreed allocations: 0. Total allocated size: 480
+
+
+
+>>>>>> مثال_شبكة.أسس
+
+الرد من example.com:
+<!doctype html><html lang="en"><head><title>Example Domain</title><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#eee;width:60vw;margin:15vh auto;font-family:system-ui,sans-serif}h1{font-size:1.5em}div{opacity:0.8}a:link,a:visited{color:#348}</style><body><div><h1>Example Domain</h1><p>This domain is for use in documentation examples without needing permission. Avoid use in operations.<p><a href="https://iana.org/domains/example">Learn more</a></div></body></html>
+
+
+

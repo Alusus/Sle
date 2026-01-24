@@ -1,0 +1,34 @@
+import "Srl/Console";
+import "Apm";
+Apm.importFile("Alusus/Sle", "Srl/enums.alusus");
+use Srl;
+
+class MyIntEnum {
+    setupIntEnum[];
+    enumIntValue[VAL1, 1];
+    enumIntValue[VAL2, 2];
+    enumIntValue[VAL3, 3];
+}
+
+class MyStringEnum {
+    setupStringEnum[];
+    enumStringValue[VAL1, "val1"];
+    enumStringValue[VAL2, "val2"];
+    enumStringValue[VAL3, "val3"];
+}
+
+func printIntEnumVal(e: MyIntEnum) {
+    Console.print("Int enum value: %d\n", e.val);
+}
+
+func printStringEnumVal(e: MyStringEnum) {
+    Console.print("String enum value: %s\n", e.val.buf);
+}
+
+printIntEnumVal(MyIntEnum.VAL1);
+printIntEnumVal(MyIntEnum.VAL2);
+printIntEnumVal(MyIntEnum.VAL3);
+
+printStringEnumVal(MyStringEnum.VAL1);
+printStringEnumVal(MyStringEnum.VAL2);
+printStringEnumVal(MyStringEnum.VAL3);

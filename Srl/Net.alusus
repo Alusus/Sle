@@ -1,0 +1,259 @@
+import "Srl/Memory";
+import "Srl/Net";
+import "Srl/Array";
+
+@merge module Srl {
+    @merge module Net {
+        class Request {
+            def url: String;
+            def authKey: String;
+            def authType: String;
+            def contentType: String = "application/json";
+            def responseBody: String;
+            def responseHttpStatus: Int = 0;
+            def httpHeaderArray: Array[String];
+            def verbose: Bool = true;
+
+
+            handler this~init(url: String, authKey: String, authType: String, contentType: String) {
+                this.url = url;
+                this.authKey = authKey;
+                this.authType = authType;
+                this.contentType = contentType;
+            }
+
+            handler this~init(url: String, authKey: String, authType: String) {
+                this.url = url;
+                this.authKey = authKey;
+                this.authType = authType;
+            }
+
+            handler this~init(url: String, contentType: String) {
+                this.url = url;
+                this.contentType = contentType;
+            }
+
+            handler this~init(url: String) {
+                this.url = url;
+            }
+
+            handler this.addHeader(header: String) {
+                this.httpHeaderArray.add(header);
+            }
+
+            handler this.initCurl(): ptr[Curl] {
+                def curlHandle: ptr[Curl] = CurlEasy.init();
+                if curlHandle == 0 return 0;
+                CurlEasy.setOpt(curlHandle, CurlOpt.URL, this.url.buf);
+                def httpHeaders: ptr[CurlSlist] = 0;
+                if this.authKey != String("") and this.authType == String("") {
+                    CurlEasy.setOpt(curlHandle, CurlOpt.USERPWD, this.authKey.buf);
+                } else if this.authKey != String("") {
+                    def authHeader: String = "";
+                    authHeader = String.format("Authorization: %s %s", this.authType.buf, this.authKey.buf);
+                    httpHeaders = CurlSlist.append(httpHeaders, authHeader.buf);
+                }
+                def contentTypeHeader: String = String.format("Content-Type: %s", this.contentType.buf);
+                httpHeaders = CurlSlist.append(httpHeaders, contentTypeHeader.buf);
+                def i: int = 0;
+                for i = 0, i < this.httpHeaderArray.getLength(), i++ {
+                    httpHeaders = CurlSlist.append(httpHeaders, this.httpHeaderArray(i).buf);
+                }
+                CurlEasy.setOpt(curlHandle, CurlOpt.HTTPHEADER, httpHeaders);
+                CurlEasy.setOpt(curlHandle, CurlOpt.USERAGENT, "ALUSUS NETWORK LIBRARY");
+                if this.verbose CurlEasy.setOpt(curlHandle, CurlOpt.VERBOSE, 1);
+                CurlEasy.setOpt(curlHandle, CurlOpt.FOLLOWLOCATION, 1);
+                CurlEasy.setOpt(curlHandle, CurlOpt.SSL_VERIFYPEER, 0);
+                return curlHandle;
+            }
+
+            handler this.performAndCaptureResponse(curlHandle: ptr[Curl]): Bool {
+                def content: ResponseContent;
+                content.data = 0;
+                content.size = 0;
+                CurlEasy.setOpt(curlHandle, CurlOpt.WRITEDATA, content~ptr);
+                CurlEasy.setOpt(curlHandle, CurlOpt.WRITEFUNCTION, responseCallback~ptr);
+                def resultCode: Int = CurlEasy.perform(curlHandle);
+                if resultCode == CurlCode.OK {
+                    def httpStatus: Int[64];
+                    CurlEasy.getInfo(curlHandle, CurlInfo.RESPONSE_CODE, httpStatus~ptr);
+                    CurlEasy.cleanup(curlHandle);
+                    this.responseBody = String(content.data~cast[CharsPtr], content.size);
+                    this.responseHttpStatus = httpStatus;
+                    Memory.free(content.data);
+                    return true;
+                } else {
+                    CurlEasy.cleanup(curlHandle);
+                    return false;
+                }
+            }
+
+            handler this.putFile(filename: String): Bool {
+                def fileData: ptr;
+                def fileSize: ArchInt;
+                if not Srl.Fs.readFile(filename, fileData~ptr, fileSize~ptr) return false;
+
+                this.httpHeaderArray.add(String.format("Content-Length: %i", fileSize~cast[Int]));
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 {
+                    Memory.free(fileData);
+                    return false;
+                }
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.CUSTOMREQUEST, "PUT");
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDS, fileData);
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDSIZE, fileSize);
+                def ret: Bool = this.performAndCaptureResponse(curlHandle);
+                Memory.free(fileData);
+                return ret;
+            }
+
+            handler this.put(data: ptr, dataSize: ArchInt): Bool {
+                this.httpHeaderArray.add(String.format("Content-Length: %i", dataSize~cast[Int]));
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.CUSTOMREQUEST, "PUT");
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDS, data);
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDSIZE, dataSize);
+                return this.performAndCaptureResponse(curlHandle);
+            }
+
+            handler this.post(postedData: ptr[array[Char]], outputFilename: ptr[array[Char]]): Bool {
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                def file: ptr[Srl.Fs.File];
+                file = Srl.Fs.openFile(outputFilename, "wb");
+                if file == 0 {
+                    CurlEasy.cleanup(curlHandle);
+                    return false;
+                }
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDS, postedData);
+                CurlEasy.setOpt(curlHandle, CurlOpt.WRITEDATA, file);
+
+                def resultCode: Int = CurlEasy.perform(curlHandle);
+                if resultCode == CurlCode.OK {
+                    def httpStatus: Int[64];
+                    CurlEasy.getInfo(curlHandle, CurlInfo.RESPONSE_CODE, httpStatus~ptr);
+                    CurlEasy.cleanup(curlHandle);
+                    this.responseHttpStatus = httpStatus;
+                    return true;
+                } else {
+                    CurlEasy.cleanup(curlHandle);
+                    return false;
+                }
+            }
+
+            handler this.post(postedData: ptr[array[Char]]): Bool {
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.POSTFIELDS, postedData);
+                return this.performAndCaptureResponse(curlHandle);
+            }
+
+            handler this.get(): Bool {
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.HTTPGET, 1);
+
+                return this.performAndCaptureResponse(curlHandle);
+            }
+
+            handler this.delete(): Bool {
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.CUSTOMREQUEST, "DELETE");
+
+                return this.performAndCaptureResponse(curlHandle);
+            }
+
+            handler this.smtp(emailArray: Array[Srl.String], password: CharsPtr): Bool {
+                class _UploadStatus {
+                    def bytesRead: ArchInt;
+                    def emailString: String;
+                }
+
+                func _smtpCallbackFunction(chunk: ptr[char], size: ArchInt, count: ArchInt, userp: ptr): ArchInt {
+                    def uploadCtx: ptr[_UploadStatus];
+                    uploadCtx = userp~cast[ptr[_UploadStatus]];
+                    def room: ArchInt;
+                    room = size * count;
+                    if ((size == 0) or(count == 0) || ((size * count) < 1)) {
+                        return 0;
+                    }
+                    def data: ptr[char];
+                    def len: ArchInt;
+                    len = uploadCtx~cnt.emailString.getLength();
+                    data = uploadCtx~cnt.emailString.buf + uploadCtx~cnt.bytesRead;
+                    if data != 0 and uploadCtx~cnt.bytesRead < len {
+                        if room < len {
+                            len = room;
+                        }
+                        Srl.Memory.copy(chunk, data, len);
+                        uploadCtx~cnt.bytesRead += len;
+                        Srl.Console.print("ver :%i \n", room);
+                        return len;
+                    }
+                    return 0;
+                }
+
+                def uploadPoiner: _UploadStatus;
+                uploadPoiner.bytesRead = 0;
+                uploadPoiner.emailString = Srl.String.merge(emailArray, "\r\n");
+
+                def curlHandle: ptr[Curl] = this.initCurl();
+                if curlHandle == 0 return false;
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.USERNAME, emailArray(1).split(":")(1).buf);
+                CurlEasy.setOpt(curlHandle, CurlOpt.PASSWORD, password);
+
+                CurlEasy.setOpt(curlHandle, CurlOpt.MAIL_FROM, emailArray(1).split(":")(1).buf);
+                def recipients: ptr[CurlSlist] = CurlSlist.append(0, emailArray(0).split(":")(1).buf);
+                def i: int = 0;
+                def ccArray: Array[Srl.String];
+                ccArray = emailArray(2).split(":")(1).split(",");
+                for i = 0, i < ccArray.getLength() - 1, i += 1 {
+                    recipients = CurlSlist.append(recipients, ccArray(i).buf);
+                }
+                CurlEasy.setOpt(curlHandle, CurlOpt.MAIL_RCPT, recipients);
+                CurlEasy.setOpt(curlHandle, CurlOpt.USE_SSL, 3);
+                CurlEasy.setOpt(curlHandle, CurlOpt.READFUNCTION, _smtpCallbackFunction~ptr);
+                CurlEasy.setOpt(curlHandle, CurlOpt.READDATA, uploadPoiner~ptr);
+                CurlEasy.setOpt(curlHandle, CurlOpt.UPLOAD, 1);
+
+                return this.performAndCaptureResponse(curlHandle);
+            }
+
+            handler this.sendEmail(
+                receivers: Srl.Array[Srl.String],
+                sender: Srl.String,
+                subject: Srl.String,
+                body: Srl.String,
+                bodyType: Srl.String,
+                password: Srl.String
+            ): bool {
+                def emailArray: Array[Srl.String];
+                emailArray.add(Srl.String("To:") + receivers(0));
+                emailArray.add(Srl.String("From:") + sender);
+                def i: int = 0;
+                def ccString: Srl.String = "";
+                for i = 1, i < receivers.getLength(), i += 1 {
+                    ccString = ccString + receivers(i) + String(",");
+                }
+                emailArray.add(Srl.String("Cc: ") + ccString);
+                emailArray.add(Srl.String("Subject: ") + subject);
+                if bodyType == Srl.String("html") {
+                    emailArray.add(Srl.String("Content-Type: text/html; charset=UTF-8"));
+                }
+                emailArray.add(Srl.String(""));
+                emailArray.add(body);
+                return this.smtp(emailArray, password.buf);
+            }
+        }
+    }
+}

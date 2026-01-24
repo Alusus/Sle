@@ -1,0 +1,10 @@
+اشمل "AstHelpers"
+
+عرف مـساعدات_شبم: لقب AstHelpers؛
+@دمج وحدة مـساعدات_شبم {
+    عرف سلسلة_محارف_من_قيمة: لقب strLiteralFromVal؛
+    عرف سلسلة_محارف_من_متغير_محيطي: لقب strLiteralFromEnvVar؛
+    عرف صحيح_حرفي_من_صحيح: لقب intLiteralFromInt؛
+    عرف صحيح_حرفي_من_محارف: لقب intLiteralFromCharsPtr؛
+    عرف صحيح_حرفي_من_متغير_محيطي: لقب intLiteralFromEnvVar؛
+}

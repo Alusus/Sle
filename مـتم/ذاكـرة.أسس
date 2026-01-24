@@ -1,0 +1,13 @@
+اشمل "مـتم/ذاكـرة"؛
+اشمل "../Srl/Memory"؛
+
+@دمج وحدة مـتم {
+    @دمج وحدة ذاكـرة {
+        عرف هيئ_الحجز_المسبق: لقب initializePreallocation؛
+        عرف صفر_الحجز_المسبق: لقب cleanupPreallocation؛
+
+        عرف ابدأ_الحجز_المسبق: لقب startPreallocation؛
+        عرف أنه_الحجز_المسبق: لقب endPreallocation؛
+        عرف نفذ_مع_حجز_مسبق: لقب runWithPreallocation؛
+    }
+}

@@ -1,0 +1,8 @@
+import "Srl/Console";
+import "Srl/String";
+import "Apm";
+Apm.importFile("Alusus/Sle", "Srl/Time.alusus");
+use Srl;
+
+def datetime: String = Time.getStringDateTime(1769207481);
+Console.print("Date and Time: %s\n", datetime.buf);

@@ -1,0 +1,8 @@
+import "Srl/Console";
+import "Srl/String";
+import "Apm";
+Apm.importFile("Alusus/Sle", "Srl/System.alusus");
+use Srl;
+
+def lang: String = System.getSystemLanguage();
+Console.print("System language: %s\n", lang.buf);

@@ -1,0 +1,34 @@
+import "Srl/String";
+
+@merge module Srl {
+    // Int based enum
+    // We'll keep this macro simple with no custom initialization so that it remains
+    // compatible with C enums.
+
+    macro setupIntEnum {
+        def val: Int;
+        handler this = ref[this_type] { this.val = value.val; }
+        handler this == ref[this_type] { this.val == value.val; }
+    }
+
+    macro enumIntValue[name, v] {
+        // This casting hack is necessary because we are avoiding custom constructors
+        // in order to keep the enum compatible with C enums.
+        @shared def name: this_type(Int(v)~ptr~cast[ptr[this_type]]~cnt);
+    }
+
+    // String based enum
+
+    macro setupStringEnum {
+        def val: Srl.String;
+        handler this~init() { }
+        handler this~init(v: CharsPtr) { this.val = Srl.String(1, v); }
+        handler this~init(v: ref[this_type]) { this.val = v.val; }
+        handler this = ref[this_type] { this.val = value.val; }
+        handler this == ref[this_type] { this.val == value.val; }
+    }
+
+    macro enumStringValue[name, val] {
+        @shared def name: this_type(val);
+    }
+}

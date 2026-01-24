@@ -1,0 +1,17 @@
+import "Srl/String";
+import "Apm";
+Apm.importFile("Alusus/Sle", "Srl/Memory.alusus");
+use Srl;
+
+func test {
+    Memory.initializePreallocation();
+    Memory.runWithPreallocation(1024, 1024, true, closure () {
+        def i: Int;
+        for i = 0, i < 10, ++i {
+            String("i = ") + i;
+        }
+    });
+    Memory.cleanupPreallocation();
+}
+
+test();
