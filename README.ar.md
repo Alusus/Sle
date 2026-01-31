@@ -691,4 +691,11 @@ macro intLiteralFromEnvVar [varName, default]
 
 انظر [Examples/مساعدات_شبم.أسس](Examples/مساعدات_شبم.أسس) للاطلاع على مثال كامل.
 
+---
+
+## الرخصة
+
+هذا المشروع مرخص بموجب رخصة غنو العمومية الصغرى الإصدار 3.0 (LGPL-3.0). راجع ملفات `COPYING` و `COPYING.LESSER` للحصول على التفاصيل.
+
+
 </div>

@@ -438,3 +438,10 @@ Create an integer-literal AST from an environment variable string.
 **Example**
 
 See [Examples/ast_helpers.alusus](Examples/ast_helpers.alusus) for a complete example.
+
+---
+
+## License
+
+This project is licensed under the GNU Lesser General Public License v3.0 (LGPL-3.0). See the `COPYING` and `COPYING.LESSER` files for details.
+
