@@ -1,5 +1,5 @@
 # Sle
-[[العربية]](readme.ar.md)
+[[العربية]](README.ar.md)
 
 Standard Libraries Extensions. This library holds a collection of extensions for standard libraries
 of Alusus programming language.
