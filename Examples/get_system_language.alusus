@@ -1,7 +1,7 @@
 import "Srl/Console";
 import "Srl/String";
 import "Apm";
-Apm.importFile("Alusus/Sle", "Srl/System.alusus");
+Apm.importPackage("Alusus/Sle@0.2", "Srl/System.alusus");
 use Srl;
 
 def lang: String = System.getSystemLanguage();

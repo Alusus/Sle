@@ -13,7 +13,7 @@ the package name as the first argument and the modules' paths as the second argu
 
 ```
 import "Apm";
-Apm.importFile("Alusus/Sle", { "<module1_path>", "<module2_path>", ... });
+Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... });
 ```
 
 **Available modules:**
@@ -34,7 +34,7 @@ Apm.importFile("Alusus/Sle", { "<module1_path>", "<module2_path>", ... });
 import "Srl/Console";
 import "Srl/String";
 import "Apm";
-Apm.importFile("Alusus/Sle", { "Srl/Console.alusus", "Srl/Time.alusus" });
+Apm.importPackage("Alusus/Sle@0.2", { "Srl/Console.alusus", "Srl/Time.alusus" });
 use Srl;
 
 def password: String = Console.getStealthString();

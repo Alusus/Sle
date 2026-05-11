@@ -1,6 +1,6 @@
 import "Srl/Console";
 import "Apm";
-Apm.importFile("Alusus/Sle", "Srl/enums.alusus");
+Apm.importPackage("Alusus/Sle@0.2", "Srl/enums.alusus");
 use Srl;
 
 class MyIntEnum {

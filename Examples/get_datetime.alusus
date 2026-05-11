@@ -1,7 +1,7 @@
 import "Srl/Console";
 import "Srl/String";
 import "Apm";
-Apm.importFile("Alusus/Sle", "Srl/Time.alusus");
+Apm.importPackage("Alusus/Sle@0.2", "Srl/Time.alusus");
 use Srl;
 
 def datetime: String = Time.getStringDateTime(1769207481);

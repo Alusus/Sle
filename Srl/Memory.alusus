@@ -19,7 +19,7 @@
 
 import "Srl/Memory";
 import "Apm";
-Apm.importFile("Alusus/Threading");
+Apm.importPackage("Alusus/Threading@0.1");
 
 @merge module Srl {
     @merge module Memory {
