@@ -4,8 +4,6 @@
 Standard Libraries Extensions. This library holds a collection of extensions for standard libraries
 of Alusus programming language.
 
----
-
 ## Importing the Library
 
 This library is organized into separate modules. To use a module, import it using `Apm.importFile` with
@@ -18,15 +16,13 @@ Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... })
 
 **Available modules:**
 
-| Module                | Description                                   |
-|-----------------------|-----------------------------------------------|
-| `Srl/Console.alusus`  | Console helpers (stealth input)               |
-| `Srl/System.alusus`   | System helpers (language detection, env vars) |
-| `Srl/Time.alusus`     | Time/date formatting                          |
-| `Srl/enums.alusus`    | Enum macros                                   |
-| `Srl/Memory.alusus`   | Memory preallocation                          |
-| `Srl/Net.alusus`      | HTTP requests                                 |
-| `AstHelpers.alusus`   | AST generation helpers                        |
+* `Srl/Console.alusus` : Console helpers (stealth input) 
+* `Srl/System.alusus`  : System helpers (language detection, env vars)
+* `Srl/Time.alusus`    : Time/date formatting 
+* `Srl/enums.alusus`   : Enum macros 
+* `Srl/Memory.alusus`  : Memory preallocation
+* `Srl/Net.alusus`     : HTTP requests 
+* `AstHelpers.alusus`  : AST generation helpers
 
 **Example:**
 
@@ -41,8 +37,6 @@ def password: String = Console.getStealthString();
 def datetime: String = Time.getCurrentStringDateTime();
 ```
 
----
-
 ## Srl/misc - Miscellaneous Helpers
 
 ### charsPtrOrDefault
@@ -52,8 +46,6 @@ macro charsPtrOrDefault [val, default]
 ```
 
 Returns the provided CharsPtr value, or the provided default if the value is 0.
-
----
 
 ## Srl/System - System Helpers
 
@@ -74,10 +66,9 @@ macro envVarOrDefault [varName, defaultVal]
 Fetch an environment variable or return a default string if the env var is not defined.
 
 **Parameters**
+
 * `varName` (CharsPtr) - name of the environment variable.
 * `defaultVal` (CharsPtr) - fallback value if the env var is unset.
-
----
 
 ## Srl/Console - Console Helpers
 
@@ -95,6 +86,7 @@ echo and canonical mode, reads one character, then restores the original termina
 An `Int` representing the character code read from the console.
 
 **Platform Notes**
+
 * On Windows, this uses the `_getch` function.
 * On Unix-like systems, this uses termios to temporarily disable echo.
 
@@ -116,8 +108,6 @@ A `String` containing the entered text.
 **Example**
 
 See [Examples/get_password.alusus](Examples/get_password.alusus) for a complete example.
-
----
 
 ## Srl/Time - Time/Date Helpers
 
@@ -142,13 +132,12 @@ function getStringDateTime(timestamp: ArchInt): String
 Return the date and time for the given timestamp as a formatted string.
 
 **Parameters**
+
 * `timestamp` (ArchInt) - Unix timestamp.
 
 **Returns**
 
 A `String` in the format: `YYYY-MM-DD HH:MM:SS`
-
----
 
 ## Srl/enums - Enum Helpers
 
@@ -171,6 +160,7 @@ macro enumIntValue [name, v]
 Defines an enum value with the given name and integer value.
 
 **Parameters**
+
 * `name` - The name of the enum value.
 * `v` - The integer value.
 
@@ -192,6 +182,7 @@ macro enumStringValue [name, val]
 Defines an enum value with the given name and string value.
 
 **Parameters**
+
 * `name` - The name of the enum value.
 * `val` - The string value.
 
@@ -212,8 +203,6 @@ class MyStringEnum {
 ```
 
 See [Examples/enum_example.alusus](Examples/enum_example.alusus) for a complete example.
-
----
 
 ## Srl/Memory - Memory Preallocation Helpers
 
@@ -245,6 +234,7 @@ func startPreallocation(size: ArchInt, enlargementSize: ArchInt): ptr
 Start a preallocation block with the given initial size and enlargement size.
 
 **Parameters**
+
 * `size` (ArchInt) - Initial block size in bytes.
 * `enlargementSize` (ArchInt) - Size for subsequent blocks if more memory is needed.
 
@@ -262,6 +252,7 @@ func endPreallocation(block: ptr, printLog: Bool)
 End a preallocation block and free all memory allocated within it.
 
 **Parameters**
+
 * `block` (ptr) - The block pointer returned by `startPreallocation`.
 * `printLog` (Bool) - If true, prints statistics about allocations.
 
@@ -274,6 +265,7 @@ func runWithPreallocation(size: ArchInt, enlargementSize: ArchInt, printLog: Boo
 Convenience function that runs a closure with preallocation enabled, automatically handling setup and cleanup.
 
 **Parameters**
+
 * `size` (ArchInt) - Initial block size.
 * `enlargementSize` (ArchInt) - Enlargement size for additional blocks.
 * `printLog` (Bool) - Whether to print allocation statistics.
@@ -282,8 +274,6 @@ Convenience function that runs a closure with preallocation enabled, automatical
 **Example**
 
 See [Examples/memory_example.alusus](Examples/memory_example.alusus) for a complete example.
-
----
 
 ## Srl/Net - Network Helpers
 
@@ -307,6 +297,7 @@ handler this~init(url: String, authKey: String, authType: String, contentType: S
 ```
 
 **Properties**
+
 * `url: String` - The request URL.
 * `authKey: String` - Authentication key/token.
 * `authType: String` - Authentication type (e.g., "Bearer").
@@ -385,8 +376,6 @@ Send an email via SMTP.
 
 See [Examples/net_example.alusus](Examples/net_example.alusus) for a complete example.
 
----
-
 ## AstHelpers - AST Generation Helpers
 
 These macros insert AST nodes at preprocessing time via `Spp.astMgr`.
@@ -439,9 +428,6 @@ Create an integer-literal AST from an environment variable string.
 
 See [Examples/ast_helpers.alusus](Examples/ast_helpers.alusus) for a complete example.
 
----
-
 ## License
 
 This project is licensed under the GNU Lesser General Public License v3.0 (LGPL-3.0). See the `COPYING` and `COPYING.LESSER` files for details.
-

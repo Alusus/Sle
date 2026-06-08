@@ -1,5 +1,3 @@
-<div dir=rtl>
-
 # تـمم (Sle)
 
 [[English]](README.md)
@@ -13,33 +11,33 @@
 هذه المكتبة مُنظمة في وحدات منفصلة. لاستخدام وحدة، استوردها باستخدام `مـحا.اشمل_ملف` مع
 اسم الحزمة كمعطى أول ومسارات الوحدات كمعطى ثانٍ:
 
+<div dir=rtl>
+
 ```
 اشمل "مـحا"؛
 مـحا.اشمل_حزمة("Alusus/Sle@0.2"، { "<مسار_وحدة1>"، "<مسار_وحدة2>"، ... })؛
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 import "Apm";
 Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... });
 ```
 
-</div>
-
 **الوحدات المتاحة:**
 
-| الوحدة العربية        | الوحدة الإنجليزية      | الوصف                 |
-|-----------------------|-----------------------|-----------------------|
-| `مـتم/طـرفية.أسس`     | `Srl/Console.alusus`  | مساعدات الطرفية       |
-| `مـتم/نـظام.أسس`      | `Srl/System.alusus`   | مساعدات النظام        |
-| `مـتم/وقـت.أسس`       | `Srl/Time.alusus`     | تنسيق الوقت والتاريخ  |
-| `مـتم/سرود.أسس`       | `Srl/enums.alusus`    | ماكروهات السرد        |
-| `مـتم/ذاكـرة.أسس`     | `Srl/Memory.alusus`   | الحجز المسبق للذاكرة  |
-| `مـتم/شـبكة.أسس`      | `Srl/Net.alusus`      | طلبات HTTP            |
-| `مـساعدات_شبم.أسس`    | `AstHelpers.alusus`   | مساعدات إنشاء ش.ب.م   |
+* `مـتم/طـرفية.أسس`  (`Srl/Console.alusus`) : مساعدات الطرفية 
+* `مـتم/طـرفية.أسس`  (`Srl/System.alusus`)  : مساعدات النظام
+* `مـتم/وقـت.أسس`    (`Srl/Time.alusus`)    : تنسيق الوقت والتاريخ 
+* `مـتم/سرود.أسس`    (`Srl/enums.alusus`)   : ماكروهات السرد 
+* `مـتم/ذاكـرة.أسس`  (`Srl/Memory.alusus`)  : الحجز المسبق للذاكرة
+* `مـتم/شـبكة.أسس`   (`Srl/Net.alusus`)     : طلبات HTTP 
+* `مـساعدات_شبم.أسس` (`AstHelpers.alusus`)  : مساعدات إنشاء ش.ب.م
 
 **مثال:**
+
+<div dir=rtl>
 
 ```
 اشمل "مـتم/طـرفية"؛
@@ -52,7 +50,7 @@ Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... })
 عرف التاريخ_والوقت: نـص = وقـت.هات_التاريخ_والوقت_الحالي_كنص()؛
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 import "Srl/Console";
@@ -65,85 +63,81 @@ def password: String = Console.getStealthString();
 def datetime: String = Time.getCurrentStringDateTime();
 ```
 
-</div>
-
 ---
 
 ## مـتم/متنوع - مساعدات متنوعة
 
 ### محارف_أو_قيمة_مبدئية (charsPtrOrDefault)
 
+<div dir=rtl>
+
 ```
 ماكرو محارف_أو_قيمة_مبدئية [القيمة، الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro charsPtrOrDefault [val, default]
 ```
 
-</div>
-
 تعيد القيمة المعطاة، أو القيمة الافتراضية إذا كانت القيمة المعطاة تساوي 0.
 
----
 
 ## مـتم/نـظام - مساعدات النظام
 
 ### هات_لغة_النظام (getSystemLanguage)
 
+<div dir=rtl>
+
 ```
 دالة هات_لغة_النظام(): نـص
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 function getSystemLanguage(): String
 ```
 
-</div>
-
 ترجع رمز اللغة للغة النظام الحالية (مثل: "en"، "ar").
 
 ### متغير_محيطي_أو_قيمة_مبدئية (envVarOrDefault)
+
+<div dir=rtl>
 
 ```
 ماكرو متغير_محيطي_أو_قيمة_مبدئية [اسم_المتغير، القيمة_الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro envVarOrDefault [varName, defaultVal]
 ```
 
-</div>
-
 تستخرج قيمة متغيّر بيئي، أو تعيد قيمة افتراضية إذا لم يكن المتغيّر البيئي معرفًا.
 
 **المعطيات**
+
 * `اسم_المتغير` (مؤشر_محارف) - اسم المتغير البيئي.
 * `القيمة_الافتراضية` (مؤشر_محارف) - القيمة الافتراضية إذا لم يكن المتغير معرفًا.
-
----
 
 ## مـتم/طـرفية - مساعدات الطرفية
 
 ### أدخل_محرفا_خلسة (getStealthChar)
 
+<div dir=rtl>
+
 ```
 دالة أدخل_محرفا_خلسة(): صحيح
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 function getStealthChar(): Int
 ```
-
-</div>
 
 تقرأ محرفًا واحدًا من الطرفية بدون عرضه على الشاشة. تعطل هذه الدالة مؤقتًا خاصية الإظهار (echo) والوضع
 القانوني (canonical mode) للطرفية، ثم تقرأ محرفًا واحدًا، ثم تعيد إعدادات الطرفية الأصلية.
@@ -153,25 +147,27 @@ function getStealthChar(): Int
 عدد صحيح يمثل رمز المحرف المقروء من الطرفية.
 
 **ملاحظات على المنصات**
+
 * في ويندوز، تستخدم الدالة `_getch`.
 * في أنظمة يونكس، تستخدم termios لتعطيل الإظهار مؤقتًا.
 
 ### أدخل_نصا_خلسة (getStealthString)
 
+<div dir=rtl>
+
 ```
 دالة أدخل_نصا_خلسة(): نـص
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 function getStealthString(): String
 ```
 
-</div>
-
 تقرأ نصًا من الطرفية بشكل آمن بدون عرض المدخلات. تقرأ هذه الدالة المحارف واحدًا تلو الآخر باستخدام
 `أدخل_محرفا_خلسة()` وتتعامل مع المفاتيح الخاصة:
+
 * **سطر جديد أو رجوع (Enter)**: يُكمل الإدخال ويعيد النص.
 * **مسح للخلف/حذف (Backspace/Delete)**: يحذف المحرف الأخير، مع دعم كامل لمحارف UTF-8 متعددة البايتات.
 
@@ -183,23 +179,21 @@ function getStealthString(): String
 
 انظر [Examples/هات_كلمة_السر.أسس](Examples/هات_كلمة_السر.أسس) للاطلاع على مثال كامل.
 
----
-
 ## مـتم/وقـت - مساعدات الوقت والتاريخ
 
 ### هات_التاريخ_والوقت_الحالي_كنص (getCurrentStringDateTime)
+
+<div dir=rtl>
 
 ```
 دالة هات_التاريخ_والوقت_الحالي_كنص(): نـص
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 function getCurrentStringDateTime(): String
 ```
-
-</div>
 
 تعيد التاريخ والوقت الحالي للنظام كسلسلة محارف منسّقة.
 
@@ -209,17 +203,17 @@ function getCurrentStringDateTime(): String
 
 ### هات_التاريخ_والوقت_كنص (getStringDateTime)
 
+<div dir=rtl>
+
 ```
 دالة هات_التاريخ_والوقت_كنص(الختم_الزمني: صحيح_معمارية): نـص
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 function getStringDateTime(timestamp: ArchInt): String
 ```
-
-</div>
 
 تعيد التاريخ والوقت المقابل للختم الزمني المعطى كسلسلة محارف منسّقة.
 
@@ -230,85 +224,87 @@ function getStringDateTime(timestamp: ArchInt): String
 
 سلسلة محارف بصيغة: `YYYY-MM-DD HH:MM:SS`
 
----
-
 ## مـتم/سرود - مساعدات السرد (Enum)
 
 ماكروهات لإنشاء سرود رقمية ونصية.
 
 ### اضبط_سردا_رقميا (setupIntEnum)
 
+<div dir=rtl>
+
 ```
 ماكرو اضبط_سردا_رقميا
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro setupIntEnum
 ```
 
-</div>
-
 يهيئ سردًا رقميًا داخل صنف. يضيف هذا الماكرو حقل `القيمة` ومعاملات المقارنة والإسناد.
 
 ### قيمة_سرد_رقمية (enumIntValue)
+
+<div dir=rtl>
 
 ```
 ماكرو قيمة_سرد_رقمية [الاسم، القيمة]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro enumIntValue [name, v]
 ```
 
-</div>
-
 يعرّف قيمة سرد بالاسم والقيمة الرقمية المعطاة.
 
 **المعطيات**
+
 * `الاسم` - اسم قيمة السرد.
 * `القيمة` - القيمة الرقمية.
 
 ### اضبط_سردا_نصيا (setupStringEnum)
 
+<div dir=rtl>
+
 ```
 ماكرو اضبط_سردا_نصيا
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro setupStringEnum
 ```
 
-</div>
-
 يهيئ سردًا نصيًا داخل صنف. يضيف هذا الماكرو حقل `القيمة` (من نوع نـص) ومعاملات التهيئة والمقارنة والإسناد.
 
 ### قيمة_سرد_نصية (enumStringValue)
+
+<div dir=rtl>
 
 ```
 ماكرو قيمة_سرد_نصية [الاسم، القيمة]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro enumStringValue [name, val]
 ```
 
-</div>
-
 يعرّف قيمة سرد بالاسم والقيمة النصية المعطاة.
 
 **المعطيات**
+
 * `الاسم` - اسم قيمة السرد.
 * `القيمة` - القيمة النصية.
 
 **مثال**
+
+<div dir=rtl>
 
 ```
 صنف سـردي_الرقمي {
@@ -324,9 +320,9 @@ macro enumStringValue [name, val]
 }
 ```
 
-انظر [Examples/مثال_سرد.أسس](Examples/مثال_سرد.أسس) للاطلاع على مثال كامل.
+</div>
 
----
+انظر [Examples/مثال_سرد.أسس](Examples/مثال_سرد.أسس) للاطلاع على مثال كامل.
 
 ## مـتم/ذاكـرة - مساعدات الحجز المسبق للذاكرة
 
@@ -335,53 +331,54 @@ macro enumStringValue [name, val]
 
 ### هيئ_الحجز_المسبق (initializePreallocation)
 
+<div dir=rtl>
+
 ```
 دالة هيئ_الحجز_المسبق
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 func initializePreallocation
 ```
 
-</div>
-
 تهيئ نظام الحجز المسبق. يجب استدعاؤها قبل استخدام ميزات الحجز المسبق.
 
 ### صفر_الحجز_المسبق (cleanupPreallocation)
+
+<div dir=rtl>
 
 ```
 دالة صفر_الحجز_المسبق
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 func cleanupPreallocation
 ```
 
-</div>
-
 تنظف وتعيد ضبط نظام الحجز المسبق.
 
 ### ابدأ_الحجز_المسبق (startPreallocation)
+
+<div dir=rtl>
 
 ```
 دالة ابدأ_الحجز_المسبق(الحجم: صحيح_معمارية، حجم_التوسيع: صحيح_معمارية): مؤشر
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 func startPreallocation(size: ArchInt, enlargementSize: ArchInt): ptr
 ```
 
-</div>
-
 تبدأ كتلة حجز مسبق بالحجم الابتدائي وحجم التوسيع المعطيين.
 
 **المعطيات**
+
 * `الحجم` (صحيح_معمارية) - حجم الكتلة الابتدائي بالبايتات.
 * `حجم_التوسيع` (صحيح_معمارية) - حجم الكتل اللاحقة إذا احتجنا ذاكرة إضافية.
 
@@ -391,43 +388,45 @@ func startPreallocation(size: ArchInt, enlargementSize: ArchInt): ptr
 
 ### أنه_الحجز_المسبق (endPreallocation)
 
+<div dir=rtl>
+
 ```
 دالة أنه_الحجز_المسبق(الكتلة: مؤشر)
 دالة أنه_الحجز_المسبق(الكتلة: مؤشر، اطبع_السجل: ثنائي)
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 func endPreallocation(block: ptr)
 func endPreallocation(block: ptr, printLog: Bool)
 ```
 
-</div>
-
 تنهي كتلة حجز مسبق وتحرر كل الذاكرة المحجوزة ضمنها.
 
 **المعطيات**
+
 * `الكتلة` (مؤشر) - مؤشر الكتلة الذي أرجعته `ابدأ_الحجز_المسبق`.
 * `اطبع_السجل` (ثنائي) - إذا كان صحيحًا، يطبع إحصائيات عن الحجوزات.
 
 ### نفذ_مع_حجز_مسبق (runWithPreallocation)
 
+<div dir=rtl>
+
 ```
 دالة نفذ_مع_حجز_مسبق(الحجم: صحيح_معمارية، حجم_التوسيع: صحيح_معمارية، اطبع_السجل: ثنائي، للتنفيذ: مغلفة())
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 func runWithPreallocation(size: ArchInt, enlargementSize: ArchInt, printLog: Bool, toRun: closure())
 ```
 
-</div>
-
 دالة مساعدة تنفذ مغلفة مع تفعيل الحجز المسبق، وتتعامل مع الإعداد والتنظيف تلقائيًا.
 
 **المعطيات**
+
 * `الحجم` (صحيح_معمارية) - حجم الكتلة الابتدائي.
 * `حجم_التوسيع` (صحيح_معمارية) - حجم التوسيع للكتل الإضافية.
 * `اطبع_السجل` (ثنائي) - هل يتم طباعة إحصائيات الحجز.
@@ -437,29 +436,29 @@ func runWithPreallocation(size: ArchInt, enlargementSize: ArchInt, printLog: Boo
 
 انظر [Examples/مثال_ذاكرة.أسس](Examples/مثال_ذاكرة.أسس) للاطلاع على مثال كامل.
 
----
-
 ## مـتم/شـبكة - مساعدات الشبكة
 
 توفر وظائف طلبات HTTP باستخدام libcurl.
 
 ### صنف طـلب (Request)
 
+<div dir=rtl>
+
 ```
 صنف طـلب
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 class Request
 ```
 
-</div>
-
 صنف لإجراء طلبات HTTP.
 
 **المهيئات**
+
+<div dir=rtl>
 
 ```
 معامل هذا~هيئ(الرابط: نـص)
@@ -468,7 +467,10 @@ class Request
 معامل هذا~هيئ(الرابط: نـص، مفتاح_المصادقة: نـص، نوع_المصادقة: نـص، نوع_البيانات: نـص)
 ```
 
+</div>
+
 **الخصائص**
+
 * `الرابط: نـص` - رابط الطلب.
 * `مفتاح_المصادقة: نـص` - مفتاح/رمز المصادقة.
 * `نوع_المصادقة: نـص` - نوع المصادقة (مثل: "Bearer").
@@ -481,85 +483,87 @@ class Request
 
 #### هات (get)
 
+<div dir=rtl>
+
 ```
 معامل هذا.هات(): ثنائي
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.get(): Bool
 ```
 
-</div>
-
 تنفذ طلب HTTP GET.
 
 #### أرسل (post)
+
+<div dir=rtl>
 
 ```
 معامل هذا.أرسل(البيانات: مؤشر[مصفوفة[محرف]]): ثنائي
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.post(postedData: ptr[array[Char]]): Bool
 ```
 
-</div>
-
 تنفذ طلب HTTP POST.
 
 #### ضع_ملف (putFile)
+
+<div dir=rtl>
 
 ```
 معامل هذا.ضع_ملف(اسم_الملف: نـص): ثنائي
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.putFile(filename: String): Bool
 ```
 
-</div>
-
 تنفذ طلب HTTP PUT بمحتويات ملف.
 
 #### احذف (delete)
+
+<div dir=rtl>
 
 ```
 معامل هذا.احذف(): ثنائي
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.delete(): Bool
 ```
 
-</div>
-
 تنفذ طلب HTTP DELETE.
 
 #### اضف_ترويسة (addHeader)
+
+<div dir=rtl>
 
 ```
 معامل هذا.اضف_ترويسة(الترويسة: نـص)
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.addHeader(header: String)
 ```
 
-</div>
-
 تضيف ترويسة HTTP مخصصة للطلب.
 
 #### أرسل_بريد (sendEmail)
+
+<div dir=rtl>
 
 ```
 معامل هذا.أرسل_بريد(
@@ -572,7 +576,7 @@ handler this.addHeader(header: String)
 ): ثنائي
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 handler this.sendEmail(
@@ -585,15 +589,11 @@ handler this.sendEmail(
 ): Bool
 ```
 
-</div>
-
 ترسل بريدًا إلكترونيًا عبر SMTP.
 
 **مثال**
 
 انظر [Examples/مثال_شبكة.أسس](Examples/مثال_شبكة.أسس) للاطلاع على مثال كامل.
-
----
 
 ## مـساعدات_شبم - مساعدات إنشاء عناصر ش.ب.م (AST)
 
@@ -601,89 +601,89 @@ handler this.sendEmail(
 
 ### سلسلة_محارف_من_قيمة (strLiteralFromVal)
 
+<div dir=rtl>
+
 ```
 ماكرو سلسلة_محارف_من_قيمة [القيمة]
 ماكرو سلسلة_محارف_من_قيمة [القيمة، الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro strLiteralFromVal [val]
 macro strLiteralFromVal [val, default]
 ```
 
-</div>
-
 يُدرج عقدة AST لعنصر نصي من مؤشر محارف. الصيغة الثانية تستخدم `الافتراضية` إذا كانت `القيمة` فارغة.
 
 ### سلسلة_محارف_من_متغير_محيطي (strLiteralFromEnvVar)
+
+<div dir=rtl>
 
 ```
 ماكرو سلسلة_محارف_من_متغير_محيطي [اسم_المتغير]
 ماكرو سلسلة_محارف_من_متغير_محيطي [اسم_المتغير، القيمة_الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro strLiteralFromEnvVar [varName]
 macro strLiteralFromEnvVar [varName, default]
 ```
 
-</div>
-
 ينشئ عنصرًا نصيًا من متغيّر بيئي. الصيغة الثانية توفر قيمة افتراضية.
 
 ### صحيح_حرفي_من_صحيح (intLiteralFromInt)
+
+<div dir=rtl>
 
 ```
 ماكرو صحيح_حرفي_من_صحيح [القيمة]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro intLiteralFromInt [val]
 ```
 
-</div>
-
 يُدرج عقدة AST لعنصر عدد صحيح من قيمة رقمية.
 
 ### صحيح_حرفي_من_محارف (intLiteralFromCharsPtr)
+
+<div dir=rtl>
 
 ```
 ماكرو صحيح_حرفي_من_محارف [القيمة]
 ماكرو صحيح_حرفي_من_محارف [القيمة، الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro intLiteralFromCharsPtr [val]
 macro intLiteralFromCharsPtr [val, default]
 ```
 
-</div>
-
 يُدرج عقدة AST لعنصر عدد صحيح من سلسلة محارف. يجب أن تحتوي السلسلة على رقم.
 
 ### صحيح_حرفي_من_متغير_محيطي (intLiteralFromEnvVar)
+
+<div dir=rtl>
 
 ```
 ماكرو صحيح_حرفي_من_متغير_محيطي [اسم_المتغير]
 ماكرو صحيح_حرفي_من_متغير_محيطي [اسم_المتغير، القيمة_الافتراضية]
 ```
 
-<div dir=ltr>
+</div>
 
 ```
 macro intLiteralFromEnvVar [varName]
 macro intLiteralFromEnvVar [varName, default]
 ```
-
-</div>
 
 ينشئ عقدة AST لعنصر عدد صحيح من متغيّر بيئي نصي.
 
@@ -691,11 +691,6 @@ macro intLiteralFromEnvVar [varName, default]
 
 انظر [Examples/مساعدات_شبم.أسس](Examples/مساعدات_شبم.أسس) للاطلاع على مثال كامل.
 
----
-
 ## الرخصة
 
 هذا المشروع مرخص بموجب رخصة غنو العمومية الصغرى الإصدار 3.0 (LGPL-3.0). راجع ملفات `COPYING` و `COPYING.LESSER` للحصول على التفاصيل.
-
-
-</div>
