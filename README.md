@@ -18,15 +18,13 @@ Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... })
 
 **Available modules:**
 
-| Module                | Description                                   |
-|-----------------------|-----------------------------------------------|
-| `Srl/Console.alusus`  | Console helpers (stealth input)               |
-| `Srl/System.alusus`   | System helpers (language detection, env vars) |
-| `Srl/Time.alusus`     | Time/date formatting                          |
-| `Srl/enums.alusus`    | Enum macros                                   |
-| `Srl/Memory.alusus`   | Memory preallocation                          |
-| `Srl/Net.alusus`      | HTTP requests                                 |
-| `AstHelpers.alusus`   | AST generation helpers                        |
+* `Srl/Console.alusus`: Console helpers (stealth input)
+* `Srl/System.alusus`: System helpers (language detection, env vars) 
+* `Srl/Time.alusus`: Time/date formatting
+* `Srl/enums.alusus`: Enum macros
+* `Srl/Memory.alusus`: Memory preallocation
+* `Srl/Net.alusus`: HTTP requests
+* `AstHelpers.alusus`: AST generation helpers
 
 **Example:**
 
