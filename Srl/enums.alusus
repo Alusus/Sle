@@ -27,7 +27,8 @@ import "Srl/String";
     macro setupIntEnum {
         def val: Int;
         handler this = ref[this_type] { this.val = value.val; }
-        handler this == ref[this_type] { this.val == value.val; }
+        handler this == ref[this_type]: Bool return this.val == value.val;
+        handler this != ref[this_type]: Bool return this.val != value.val;
     }
 
     macro enumIntValue[name, v] {
@@ -44,7 +45,8 @@ import "Srl/String";
         handler this~init(v: CharsPtr) { this.val = Srl.String(1, v); }
         handler this~init(v: ref[this_type]) { this.val = v.val; }
         handler this = ref[this_type] { this.val = value.val; }
-        handler this == ref[this_type] { this.val == value.val; }
+        handler this == ref[this_type]: Bool return this.val == value.val;
+        handler this != ref[this_type]: Bool return this.val != value.val;
     }
 
     macro enumStringValue[name, val] {
