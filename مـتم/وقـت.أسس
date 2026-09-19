@@ -20,7 +20,9 @@
 
 @دمج وحدة مـتم {
     @دمج وحدة وقـت {
-        عرف هات_التاريخ_والوقت_كنص: لقب getStringDateTime؛
-        عرف هات_التاريخ_والوقت_الحالي_كنص: لقب getCurrentStringDateTime؛
+        عرف هات_التاريخ_والوقت_المحلي_كنص: لقب getStringLocalDateTime؛
+        عرف هات_التاريخ_والوقت_العالمي_كنص: لقب getStringUTCDateTime؛
+        عرف هات_التاريخ_والوقت_الحالي_المحلي_كنص: لقب getCurrentStringLocalDateTime
+        عرف هات_التاريخ_والوقت_الحالي_العالمي_كنص: لقب getCurrentStringUTCDateTime
     }
 }

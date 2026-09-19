@@ -4,5 +4,5 @@ import "Apm";
 Apm.importPackage("Alusus/Sle@0.2", "Srl/Time.alusus");
 use Srl;
 
-def datetime: String = Time.getStringDateTime(1769207481);
+def datetime: String = Time.getStringUTCDateTime(1769207481);
 Console.print("Date and Time: %s\n", datetime.buf);
