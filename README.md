@@ -36,7 +36,7 @@ Apm.importPackage("Alusus/Sle@0.2", { "Srl/Console.alusus", "Srl/Time.alusus" })
 use Srl;
 
 def password: String = Console.getStealthString();
-def datetime: String = Time.getCurrentStringDateTime();
+def datetime: String = Time.getCurrentStringLocalDateTime();
 ```
 
 ---
@@ -119,32 +119,68 @@ See [Examples/get_password.alusus](Examples/get_password.alusus) for a complete 
 
 ## Srl/Time - Time/Date Helpers
 
-### getCurrentStringDateTime
+### getCurrentStringLocalDateTime
 
 ```
-function getCurrentStringDateTime(): String
+function getCurrentStringLocalDateTime(): String
 ```
 
-Return the current system date and time as a formatted string.
+Return the current system date and time in the local timezone.
 
 **Returns**
 
-A `String` in the format: `YYYY-MM-DD HH:MM:SS`
+A `String` in RFC 3339 format, including the local UTC offset. For example: `2026-01-23T14:31:21-08:00`
 
-### getStringDateTime
+### getCurrentStringUTCDateTime
 
 ```
-function getStringDateTime(timestamp: ArchInt): String
+function getCurrentStringUTCDateTime(): String
 ```
 
-Return the date and time for the given timestamp as a formatted string.
+Return the current system date and time in UTC.
+
+**Returns**
+
+A `String` in RFC 3339 format, with a UTC offset of `+00:00`. For example: `2026-01-23T22:31:21+00:00`
+
+### getStringLocalDateTime
+
+```
+function getStringLocalDateTime(timestamp: ArchInt): String
+```
+
+Return the date and time for the given timestamp in the local timezone.
+
+The offset (like `+02:00`) can be different at different times of the year, because some countries move their clocks
+forward by one hour in summer (daylight saving time).
+
+For example, in a country that uses `+02:00` in winter and `+03:00` in summer, a January
+timestamp gives `+02:00` and a July timestamp gives `+03:00`.
+
+The function uses the offset that was in use on the date of the
+timestamp, not today's offset.
 
 **Parameters**
 * `timestamp` (ArchInt) - Unix timestamp.
 
 **Returns**
 
-A `String` in the format: `YYYY-MM-DD HH:MM:SS`
+A `String` in RFC 3339 format, including the local UTC offset. For example: `2026-01-23T14:31:21-08:00`
+
+### getStringUTCDateTime
+
+```
+function getStringUTCDateTime(timestamp: ArchInt): String
+```
+
+Return the date and time for the given timestamp in UTC.
+
+**Parameters**
+* `timestamp` (ArchInt) - Unix timestamp.
+
+**Returns**
+
+A `String` in RFC 3339 format, with a UTC offset of `+00:00`. For example: `2026-01-23T22:31:21+00:00`
 
 ---
 
