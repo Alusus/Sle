@@ -4,10 +4,10 @@ Apm.importPackage("Alusus/Sle@0.2", "Srl/Net.alusus");
 use Srl;
 
 func test {
-    def request: Net.Request(String("https://example.com"));
+    def request: Net.Request(String("https://alusus.org/Examples/General/hello_world.alusus"));
     request.verbose = false;
     request.get();
-    Console.print("Response from example.com:\n%s", request.responseBody.buf);
+    Console.print("Response from https://alusus.org/Examples/General/hello_world.alusus:\n%s", request.responseBody.buf);
 }
 
 test();

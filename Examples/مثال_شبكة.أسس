@@ -5,10 +5,10 @@
 استخدم مـتم؛
 
 دالة اختبار {
-    عرف طلب: شـبكة.طـلب(نـص("https://example.com"))؛
+    عرف طلب: شـبكة.طـلب(نـص("https://alusus.org/Examples/General/hello_world.alusus"))؛
     طلب.إطناب = 0؛
     طلب.هات()؛
-    طـرفية.اطبع("الرد من example.com:\ج%s"، طلب.متن_الرد.صوان)؛
+    طـرفية.اطبع("الرد من https://alusus.org/Examples/General/hello_world.alusus:\ج%s"، طلب.متن_الرد.صوان)؛
 }
 
 اختبار()؛

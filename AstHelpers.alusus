@@ -18,13 +18,13 @@
  */
 
 import "Srl/String";
-import "Core/Data";
+import "Core/Ast";
 import "Spp";
 import "Srl/misc";
 
 @merge module AstHelpers {
     macro strLiteralFromVal [val] preprocess {
-        Spp.astMgr.insertAst(Core.Data.Ast.StringLiteral(val));
+        Spp.astMgr.insertAst(Core.Ast.StringLiteral(val));
     }
 
     macro strLiteralFromVal [val, default] strLiteralFromVal[Srl.charsPtrOrDefault[val, default]];
@@ -34,11 +34,11 @@ import "Srl/misc";
     macro strLiteralFromEnvVar [varName, default] strLiteralFromVal[System.getEnv(varName), default];
 
     macro intLiteralFromInt [val] preprocess {
-        Spp.astMgr.insertAst(Core.Data.Ast.IntegerLiteral(String() + val));
+        Spp.astMgr.insertAst(Core.Ast.IntegerLiteral(String() + val));
     }
 
     macro intLiteralFromCharsPtr [val] preprocess {
-        Spp.astMgr.insertAst(Core.Data.Ast.IntegerLiteral(val));
+        Spp.astMgr.insertAst(Core.Ast.IntegerLiteral(val));
     }
 
     macro intLiteralFromCharsPtr [val, default] intLiteralFromCharsPtr[Srl.charsPtrOrDefault[val, default]];
