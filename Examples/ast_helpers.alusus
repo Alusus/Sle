@@ -1,7 +1,7 @@
 import "Srl/Console";
 import "Srl/System";
 import "Apm";
-Apm.importPackage("Alusus/Sle@0.2", "AstHelpers.alusus");
+Apm.importPackage("Alusus/Sle@0.3", "AstHelpers.alusus");
 use Srl;
 use AstHelpers;
 

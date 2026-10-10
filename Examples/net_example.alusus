@@ -1,6 +1,6 @@
 import "Srl/String";
 import "Apm";
-Apm.importPackage("Alusus/Sle@0.2", "Srl/Net.alusus");
+Apm.importPackage("Alusus/Sle@0.3", "Srl/Net.alusus");
 use Srl;
 
 func test {

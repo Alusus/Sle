@@ -14,14 +14,14 @@
 
 ```
 اشمل "مـحا"؛
-مـحا.اشمل_حزمة("Alusus/Sle@0.2"، { "<مسار_وحدة1>"، "<مسار_وحدة2>"، ... })؛
+مـحا.اشمل_حزمة("Alusus/Sle@0.3"، { "<مسار_وحدة1>"، "<مسار_وحدة2>"، ... })؛
 ```
 
 <div dir=ltr>
 
 ```
 import "Apm";
-Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... });
+Apm.importPackage("Alusus/Sle@0.3", { "<module1_path>", "<module2_path>", ... });
 ```
 
 </div>
@@ -42,7 +42,7 @@ Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... })
 اشمل "مـتم/طـرفية"؛
 اشمل "مـتم/نـص"؛
 اشمل "مـحا"؛
-مـحا.اشمل_حزمة("Alusus/Sle@0.2"، { "مـتم/طـرفية.أسس"، "مـتم/وقـت.أسس" })؛
+مـحا.اشمل_حزمة("Alusus/Sle@0.3"، { "مـتم/طـرفية.أسس"، "مـتم/وقـت.أسس" })؛
 استخدم مـتم؛
 
 عرف كلمة_السر: نـص = طـرفية.أدخل_نصا_خلسة()؛
@@ -55,7 +55,7 @@ Apm.importPackage("Alusus/Sle@0.2", { "<module1_path>", "<module2_path>", ... })
 import "Srl/Console";
 import "Srl/String";
 import "Apm";
-Apm.importPackage("Alusus/Sle@0.2", { "Srl/Console.alusus", "Srl/Time.alusus" });
+Apm.importPackage("Alusus/Sle@0.3", { "Srl/Console.alusus", "Srl/Time.alusus" });
 use Srl;
 
 def password: String = Console.getStealthString();
